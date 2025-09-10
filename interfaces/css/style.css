@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Kablammo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kotta+One&display=swap');
+:root {
+    --persimmon: #DB8F59;
+    /* Laranja cobre */
+    --chestnut: #834D33;
+    /* Marrom castanho */
+    --dark-coffee: #302020;
+    /* Café escuro */
+    --moss-green: #929456;
+    /* Verde musgo */
+    --goldenrod: #EBBA62;
+    /* Amarelo dourado */
+    --beige: #F7E7B4;
+    /* Creme claro */
+    --white: #fff;
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --radius: 12px;
+    --transition: all 0.25s ease;
+    --kablammo: "Kablammo", system-ui;
+    --font-family: "Kotta One", serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    background: linear-gradient(135deg, var(--beige) 60%, var(--goldenrod) 100%);
+    color: var(--dark-coffee);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header {
+    background-color: rgba(255, 123, 0, 0.7);
+    width: 100%;
+    height: 20%;
+    position: fixed;
+}
+
+header nav {
+    display: flex;
+    gap: 10%;
+}
+
+header nav li {
+    list-style: none;
+    text-decoration: none;
+    margin-top: 5%;
+}
+
+header nav li a {
+    color: var(--dark-coffee);
+    font-family: var(--font-family);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Cabeçalhos */
+h2 {
+    font-family: var(--kablammo);
+    font-weight: 400;
+    color: var(--chestnut);
+    text-align: center;
+    letter-spacing: 0.5px;
+    margin-top: 2rem;
+}
+
+/* Formulário */
+form {
+    background: var(--white);
+    padding: 5%;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 480px;
+    transition: var(--transition);
+}
+
+/* Inputs */
+input {
+    padding: 2.5%;
+    border: 2px solid var(--moss-green);
+    border-radius: var(--radius);
+    transition: var(--transition);
+}
+
+input:focus {
+    border-color: var(--persimmon);
+    box-shadow: 0 0 0 3px rgba(219, 143, 89, 0.25);
+}
+
+/* Botão */
+main section form button {
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    padding: 3%;
+    border: none;
+    border-radius: var(--radius);
+    background: var(--persimmon);
+    color: var(--white);
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+button:hover {
+    background: var(--chestnut);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* Lista */
+ul#plantasLista {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 960px;
+}
+
+/* Itens da lista */
+ul#plantasLista li {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+ul#plantasLista li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}

@@ -10,58 +10,66 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// rota GET para listar usuários
-app.get('/users', (req, res) => {
-    const sql = 'SELECT id, name, email, profile_status, profile_role FROM users';
+// rota GET para listar plantas
+app.get('/plantas', (req, res) => {
+    const sql = 'SELECT id, nomePopular, nomeCientifico, usoMedicinal, modoPreparo, contraindicacao FROM plantas';
 
     db.query(sql, (err, results) => {
         if (err) {
-            console.error('Erro ao buscar usuários:', err);
-            return res.status(500).json({ erro: 'Erro ao buscar por usuários no banco de dados.' });
+            console.error('Erro ao buscar plantas:', err);
+            return res.status(500).json({ erro: 'Erro ao buscar por plantas no banco de dados.' });
         }
         res.json(results);
     });
 });
 
-// rota POST para cadastrar usuário
-app.post('/users', (req, res) => {
-    const { name, email, hash_password, phone } = req.body;
-    const sql = 'INSERT INTO users (name, email, hash_password, phone) VALUES (?, ?, ?, ?)';
+// rota POST para cadastrar planta
+app.post('/plantas', (req, res) => {
+    const { nomePopular, nomeCientifico, familiaBotanica, origem, usoMedicinal, principioAtivo, parteUtilizada, modoPreparo } = req.body;
+    const sql = 'INSERT INTO plantas (nomePopular, nomeCientifico, familiaBotanica, origem, usoMedicinal, principioAtivo, parteUtilizada, modoPreparo, contraindicacao, imagem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 
-    db.query(sql, [name, email, hash_password, phone], (err, result) => {
+    db.query(sql, [nomePopular, nomeCientifico, familiaBotanica, origem, usoMedicinal, principioAtivo, parteUtilizada, modoPreparo], (err, result) => {
         if (err) {
-            console.error('Erro ao inserir usuário:', err);
-            return res.status(500).json({ erro: 'Erro ao salvar usuário no banco de dados.' });
+            console.error('Erro ao coletar planta:', err);
+            return res.status(500).json({ erro: 'Erro ao adicionar planta ao herbário.' });
         }
         res.json({
             id: result.insertId,
-            name,
-            email,
-            phone
+            nomePopular,
+            nomeCientifico,
+            origem,
+            usoMedicinal,
+            principioAtivo,
+            parteUtilizada,
+            modoPreparo
         });
     });
 });
 
-app.post('/users', (req, res) => {
-    const { name, email, hash_password, phone } = req.body;
-    const sql = 'INSERT INTO users (name, email, hash_password, phone) VALUES (?, ?, ?, ?)';
+app.post('/plantas', (req, res) => {
+    const { nomePopular, nomeCientifico, familiaBotanica, origem, usoMedicinal, principioAtivo, parteUtilizada, modoPreparo } = req.body;
+    const sql = 'INSERT INTO plantas (nomePopular, nomeCientifico, familiaBotanica, origem, usoMedicinal, principioAtivo, parteUtilizada, modoPreparo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 
-    db.query(sql, [name, email, hash_password, phone], (err, result) => {
+    db.query(sql, [nomePopular, nomeCientifico, familiaBotanica, origem, usoMedicinal, principioAtivo, parteUtilizada, modoPreparo], (err, result) => {
         if (err) {
-            console.error('Erro ao inserir usuário', err);
-            res.status(500).json({ erro: 'Erro ao salvar usuário no banco de dados.' });
+            console.error('Erro ao coletar planta', err);
+            res.status(500).json({ erro: 'Erro ao salvar planta no banco de dados.' });
         } else {
             res.json({
                 id: result.insertId,
-                name: name,
-                email: email,
-                phone: phone,
+                nomePopular: nomePopular,
+                nomeCientifico: nomeCientifico,
+                origem: origem,
+                usoMedicinal: usoMedicinal,
+                principioAtivo: principioAtivo,
+                parteUtilizada: parteUtilizada,
+                modoPrepar: modoPreparo
             });
         }
     });
 });
 
 // subir servidor
-app.listen(5502, () => {
-    console.log('Servidor rodando em http://127.0.0.1:5502/')
+app.listen(5500, () => {
+    console.log('Servidor rodando em http://127.0.0.1:5500/')
 });

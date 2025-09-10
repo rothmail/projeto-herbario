@@ -5,23 +5,63 @@
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Integração Front-End</title>
+    <link rel="stylesheet" href="./interfaces/css/style.css">
 </head>
 
 <body>
-    <h2>Cadastro de Usuário</h2>
+    <header id="container-header-hero">
+        <nav id="container-nav-menu">
+            <img id="logoHerbario" src="./interfaces/img/logoHerbario.png" alt="Logo do Herbário" width="20%"
+                height="auto">
+                <li><a href="#container-section-hero">Início</a></li>
+                <li><a href="#container-section-form">Adicionar Plantas</a></li>
+                <li><a href="#container-section-listar">Herbário</a></li>
+        </nav>
+    </header>
+    <main>
+        <section id="container-section-hero"></section>
+        <section id="container-section-form">
+            <h2>Levar Planta ao Herbário</h2>
 
-    <form id='formRegister'>
-        <input type='text' id='popularName' placeholder='Camomila' required />
-        <input type='text' id='scientificName' placeholder='Matricaria chamomilla' required />
-        <input type='text' id='botanicFamily' placeholder='Asteraceae' required />
-        <input type='text' id='origin' placeholder='Norte da África' />
-        <input type='text' id='origin' placeholder='Norte da África' />
-        <input type='text' id='origin' placeholder='Norte da África' />
-        <button type='submit'>Levar ao Hebário</button>
-    </form>
+            <form id='formRegister'>
+                <label for="nomePopular">Nome Popular</label>
+                <input type='text' id='nomePopular' placeholder='ex: Camomila' required />
 
-    <h2>Lista de Usuários</h2>
-    <ul id='usersList'></ul>
+                <label for="nomeCientifico">Nome Científico</label>
+                <input type='text' id='nomeCientifico' placeholder='ex: Matricaria chamomilla' required />
+
+                <label for="familiaBotanica">Família Botânica</label>
+                <input type='text' id='familiaBotanica' placeholder='ex: Asteraceae' required />
+
+                <label for="origem">origem</label>
+                <input type='text' id='origem' placeholder='ex: Norte da África' />
+
+                <label for="usoMedicinal">Uso Medicinal</label>
+                <input type='text' id='usoMedicinal' placeholder='ex: Anti-inflamatório' />
+
+                <label for="principioAtivo">Principio Ativo</label>
+                <input type='text' id='principioAtivo' placeholder='ex: Flavonóides' />
+
+                <label for="parteUtilizada">Parte Utilizada</label>
+                <input type='text' id='parteUtilizada' placeholder='ex: Folhas' />
+
+                <label for="modoPreparo">Modo de Preparo Botânica</label>
+                <input type='text' id='modoPreparo' placeholder='ex: Ferver uma xícara de água' />
+
+                <label for="contraindicacao">Contraindicacao</label>
+                <input type='text' id='contraindicacao' placeholder='ex: Gestantes' />
+
+                <label for="imagem">Url da Imagem</label>
+                <input type='text' id='imagem' placeholder='ex: https://exemplo.com' />
+                <button type='submit'>LEVAR AO HERBÁRIO</button>
+            </form>
+        </section>
+
+        <section id="container-section-listar">
+            <h2>Plantas no Herbário</h2>
+            <ul id='plantasLista'></ul>
+        </section>
+    </main>
 
     <script src='./script.js'></script>
 </body>
