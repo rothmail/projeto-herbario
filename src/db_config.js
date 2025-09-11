@@ -18,4 +18,16 @@ connection.connect((err) => {
     }
 });
 
+async function getData() {
+    try {
+      const connection = await pool.getConnection(); // Obtém uma conexão do pool
+      const [rows] = await connection.execute('SELECT*FROM projeto_herbario'); // Executa a consulta
+      connection.release(); // Libera a conexão de volta para o pool
+      return rows;
+    } catch (error) {
+      console.error("Erro ao buscar dados:", error);
+      throw error;
+    }
+}
+
 module.exports = connection;

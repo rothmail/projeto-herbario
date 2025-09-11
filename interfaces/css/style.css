@@ -8,6 +8,7 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: #f4f4f4;
     color: #333;
+    width: 100%;
 }
 
 /* Cabeçalho */
@@ -15,6 +16,12 @@ header {
     background-color: #fff;
     padding: 1rem 2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+}
+
+header nav {
+    padding-top: 1%;
 }
 
 header nav ul {
@@ -152,4 +159,11 @@ ul#plantasLista li h3 {
 ul#plantasLista li p {
     font-size: 1rem;
     color: #777;
+}
+
+/* Responsividade para IPHONE SE */
+@media screen and (max-width: 992px) {
+    section form input {
+        width: 100%;
+    }
 }

@@ -1,7 +1,7 @@
 // server.js
 const express = require('express');
 const cors = require('cors');
-const db = require('./db_config'); // seu arquivo db_config.js (mais abaixo)
+const db = require('./db_config');
 
 const app = express();
 const PORT = 5500;
@@ -14,15 +14,15 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/plantas', (req, res) => {
     const sql = `SELECT 
     id,
-    nomePopular AS nomePopular,
+    nome_popular AS nomePopular,
     nome_cientifico AS nomeCientifico,
     familia_botanica AS familiaBotanica,
     origem AS origem,
     usos_medicinais AS usosMedicinais,
-    principios_ativos AS principiosAtivos,
+    principios_ativos AS principioAtivo,
     parte_utilizada AS parteUtilizada,
     modo_preparo AS modoPreparo,
-    contraindicacoes AS contraindicacoes,
+    contraindicacoes AS contraindicacao,
     imagem AS imagem
     FROM plantas ORDER BY id DESC`;
     db.query(sql, (err, results) => {
@@ -38,13 +38,13 @@ app.get('/plantas', (req, res) => {
 app.post('/plantas', (req, res) => {
     const {
         nomePopular, nomeCientifico, familiaBotanica, origem,
-        usosMedicinais, principiosAtivos, parteUtilizada,
-        modoPreparo, contraindicacoes, imagem
+        usoMedicinal, principioAtivo, parteUtilizada,
+        modoPreparo, contraindicacao, imagem
     } = req.body;
 
     // validação mínima
     if (!nomePopular || !nomeCientifico) {
-        return res.status(400).json({ erro: 'nomePopular e nomeCientifico são obrigatórios.' });
+        return res.status(400).json({ erro: '"Nome Popular" e "Nome Científico" são obrigatórios.' });
     }
 
     const sql = `INSERT INTO plantas
@@ -53,8 +53,8 @@ app.post('/plantas', (req, res) => {
 
     const values = [
         nomePopular, nomeCientifico, familiaBotanica || null, origem || null,
-        usosMedicinais || null, principiosAtivos || null, parteUtilizada || null,
-        modoPreparo || null, contraindicacoes || null, imagem || null
+        usoMedicinal || null, principioAtivo || null, parteUtilizada || null,
+        modoPreparo || null, contraindicacao || null, imagem || null
     ];
 
     db.query(sql, values, (err, result) => {

@@ -29,7 +29,7 @@ function renderPlantas(plantas = []) {
   plantas.forEach(p => {
     const li = document.createElement('li');
     li.className = 'plant-card';
-    const imgSrc = p.imagem && p.imagem.startsWith('http') ? p.imagem : './img/placeholder.png';
+    const imgSrc = p.imagem && p.imagem.startsWith('http') ? p.imagem : './interfaces/img/placeholder.png';
     li.innerHTML = `
       <img src="${imgSrc}" alt="Imagem de ${escapeHtml(p.nomePopular || p.nome_popular || 'planta')}">
       <div class="meta">
@@ -45,37 +45,37 @@ function renderPlantas(plantas = []) {
 function escapeHtml(unsafe) {
   if (!unsafe) return '';
   return String(unsafe)
-    .replaceAll('&','&amp;')
-    .replaceAll('<','&lt;')
-    .replaceAll('>','&gt;')
-    .replaceAll('"','&quot;')
-    .replaceAll("'",'&#039;');
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
 }
 
-function shorten(text, n=60){
+function shorten(text, n = 60) {
   if (!text) return '';
-  return text.length > n ? text.slice(0,n) + '…' : text;
+  return text.length > n ? text.slice(0, n) + '…' : text;
 }
 
 form.addEventListener('submit', async (ev) => {
   ev.preventDefault();
   message.textContent = '';
   const data = {
-    nomePopular: form.nomePopular.value.trim(),
-    nomeCientifico: form.nomeCientifico.value.trim(),
-    familiaBotanica: form.familiaBotanica.value.trim(),
+    nome_popular: form.nomePopular.value.trim(),
+    nome_cientifico: form.nomeCientifico.value.trim(),
+    familia_botanica: form.familiaBotanica.value.trim(),
     origem: form.origem.value.trim(),
-    usosMedicinais: form.usosMedicinais.value.trim(),
-    principiosAtivos: form.principiosAtivos.value.trim(),
-    parteUtilizada: form.parteUtilizada.value.trim(),
-    modoPreparo: form.modoPreparo.value.trim(),
+    usos_medicinais: form.usosMedicinais.value.trim(),
+    principios_ativos: form.principiosAtivos.value.trim(),
+    parte_utilizada: form.parteUtilizada.value.trim(),
+    modo_preparo: form.modoPreparo.value.trim(),
     contraindicacoes: form.contraindicacoes.value.trim(),
     imagem: form.imagem.value.trim()
   };
 
   // validação simples
-  if (!data.nomePopular || !data.nomeCientifico) {
-    message.textContent = 'Por favor preencha Nome Popular e Nome Científico.';
+  if (!data.nome_popular || !data.nome_cientifico) {
+    message.textContent = 'Por favor preencha "Nome Popular" e "Nome Científico".';
     return;
   }
 
@@ -86,7 +86,7 @@ form.addEventListener('submit', async (ev) => {
       body: JSON.stringify(data)
     });
     if (!res.ok) {
-      const err = await res.json().catch(()=>({message: 'Erro'}));
+      const err = await res.json().catch(() => ({ message: 'Erro' }));
       throw new Error(err.erro || err.message || 'Erro ao cadastrar');
     }
     const saved = await res.json();
