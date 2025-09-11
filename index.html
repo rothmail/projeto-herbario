@@ -1,69 +1,83 @@
 <!DOCTYPE html>
-<html lang='pt-BR'>
+<html lang="pt-BR">
 
 <head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Integração Front-End</title>
-    <link rel="stylesheet" href="./interfaces/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herbário Digital - Wireframe</title><link rel="stylesheet" href="./interfaces/css/style.css">
 </head>
 
 <body>
-    <header id="container-header-hero">
-        <nav id="container-nav-menu">
-            <img id="logoHerbario" src="./interfaces/img/logoHerbario.png" alt="Logo do Herbário" width="20%"
-                height="auto">
-                <li><a href="#container-section-hero">Início</a></li>
-                <li><a href="#container-section-form">Adicionar Plantas</a></li>
-                <li><a href="#container-section-listar">Herbário</a></li>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#hero">Início</a></li>
+                <li><a href="#form-section">Adicionar Planta</a></li>
+                <li><a href="#list-section">Herbário</a></li>
+            </ul>
         </nav>
     </header>
-    <main>
-        <section id="container-section-hero"></section>
-        <section id="container-section-form">
-            <h2>Levar Planta ao Herbário</h2>
 
-            <form id='formRegister'>
-                <label for="nomePopular">Nome Popular</label>
-                <input type='text' id='nomePopular' placeholder='ex: Camomila' required />
+    <section id="hero">
+        <img src="./interfaces/img/logoHerbario.png" alt="Logo Herbário">
+        <h1>Bem-vindo(a) ao seu Herbário</h1>
+        <p>Pronto(a) para fazer suas coletas?</p>
+    </section>
 
-                <label for="nomeCientifico">Nome Científico</label>
-                <input type='text' id='nomeCientifico' placeholder='ex: Matricaria chamomilla' required />
+    <section id="form-section">
+        <h2>Adicionar Planta</h2>
+        <form id="formRegister">
+            <label for="nomePopular">Nome Popular</label>
+            <input type="text" id="nomePopular" placeholder="Ex: Camomila">
 
-                <label for="familiaBotanica">Família Botânica</label>
-                <input type='text' id='familiaBotanica' placeholder='ex: Asteraceae' required />
+            <label for="nomeCientifico">Nome Científico</label>
+            <input type="text" id="nomeCientifico" placeholder="Ex: Matricaria chamomilla">
 
-                <label for="origem">origem</label>
-                <input type='text' id='origem' placeholder='ex: Norte da África' />
+            <label for="familiaBotanica">Família Botânica</label>
+            <input type="text" id="familiaBotanica" placeholder="Ex: Asteraceae">
 
-                <label for="usoMedicinal">Uso Medicinal</label>
-                <input type='text' id='usoMedicinal' placeholder='ex: Anti-inflamatório' />
+            <label for="origem">Origem</label>
+            <input type="text" id="origem" placeholder="Ex: Norte da África">
 
-                <label for="principioAtivo">Principio Ativo</label>
-                <input type='text' id='principioAtivo' placeholder='ex: Flavonóides' />
+            <label for="usoMedicinal">Uso Medicinal</label>
+            <input type="text" id="usoMedicinal" placeholder="Ex: Anti-inflamatório">
 
-                <label for="parteUtilizada">Parte Utilizada</label>
-                <input type='text' id='parteUtilizada' placeholder='ex: Folhas' />
+            <label for="principioAtivo">Princípio Ativo</label>
+            <input type="text" id="principioAtivo" placeholder="Ex: Flavonoides">
 
-                <label for="modoPreparo">Modo de Preparo Botânica</label>
-                <input type='text' id='modoPreparo' placeholder='ex: Ferver uma xícara de água' />
+            <label for="parteUtilizada">Parte Utilizada</label>
+            <input type="text" id="parteUtilizada" placeholder="Ex: Folhas">
 
-                <label for="contraindicacao">Contraindicacao</label>
-                <input type='text' id='contraindicacao' placeholder='ex: Gestantes' />
+            <label for="modoPreparo">Modo de Preparo</label>
+            <input type="text" id="modoPreparo" placeholder="Ex: Infusão">
 
-                <label for="imagem">Url da Imagem</label>
-                <input type='text' id='imagem' placeholder='ex: https://exemplo.com' />
-                <button type='submit'>LEVAR AO HERBÁRIO</button>
-            </form>
-        </section>
+            <label for="contraindicacao">Contraindicações</label>
+            <input type="text" id="contraindicacao" placeholder="Ex: Gestantes">
 
-        <section id="container-section-listar">
-            <h2>Plantas no Herbário</h2>
-            <ul id='plantasLista'></ul>
-        </section>
-    </main>
+            <label for="imagem">URL da Imagem</label>
+            <input type="text" id="imagem" placeholder="Ex: https://exemplo.com/plant.jpg">
 
-    <script src='./script.js'></script>
+            <button type="submit">Adicionar ao Herbário</button>
+        </form>
+    </section>
+
+    <section id="list-section">
+        <h2>Plantas no Herbário</h2>
+        <ul id="plantasLista">
+            <li>
+                <img src="https://via.placeholder.com/200x150" alt="Planta">
+                <h3>Camomila</h3>
+                <p>Matricaria chamomilla</p>
+            </li>
+            <li>
+                <img src="https://via.placeholder.com/200x150" alt="Planta">
+                <h3>Hortelã</h3>
+                <p>Mentha spicata</p>
+            </li>
+        </ul>
+    </section>
+
 </body>
 
 </html>
