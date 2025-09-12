@@ -100,7 +100,9 @@ form input:focus {
     border-color: #6b8e23;
 }
 
-form button {
+/* consertar mais tarde */
+button {
+    display: grid;
     grid-column: span 2;
     padding: 1rem;
     background-color: #6b8e23;
