@@ -19,12 +19,7 @@ async function fetchPlantas() {
   }
 }
 
-/**
- * Renderiza a lista de plantas de forma segura, criando elementos DOM
- * em vez de usar innerHTML com dados do usuário.
- */
 function renderPlantas(plantas = []) {
-  // Limpa a lista de plantas existentes
   lista.innerHTML = '';
 
   if (!plantas.length) {
@@ -33,7 +28,6 @@ function renderPlantas(plantas = []) {
   }
 
   plantas.forEach(p => {
-    // 1. Cria os elementos principais
     const li = document.createElement('li');
     li.className = 'plant-card';
 
