@@ -1,6 +1,6 @@
 // script.js - cliente
 const API_BASE = location.hostname === '127.0.0.1' || location.hostname === 'localhost'
-  ? 'http://127.0.0.1:5500'
+  ? 'http://127.0.0.1:5500/index.html'
   : ''; // se for publicado no mesmo host, use relativo
 
 const form = document.getElementById('formRegister');
@@ -19,37 +19,53 @@ async function fetchPlantas() {
   }
 }
 
+/**
+ * Renderiza a lista de plantas de forma segura, criando elementos DOM
+ * em vez de usar innerHTML com dados do usuário.
+ */
 function renderPlantas(plantas = []) {
+  // Limpa a lista de plantas existentes
   lista.innerHTML = '';
+
   if (!plantas.length) {
     lista.innerHTML = `<li class="plant-card"><div class="meta"><p>Nenhuma planta cadastrada.</p></div></li>`;
     return;
   }
 
   plantas.forEach(p => {
+    // 1. Cria os elementos principais
     const li = document.createElement('li');
     li.className = 'plant-card';
+
+    const img = document.createElement('img');
+    const metaDiv = document.createElement('div');
+    metaDiv.className = 'meta';
+
     const imgSrc = p.imagem && p.imagem.startsWith('http') ? p.imagem : './interfaces/img/placeholder.png';
-    li.innerHTML = `
-      <img src="${imgSrc}" alt="Imagem de ${escapeHtml(p.nomePopular || p.nome_popular || 'planta')}">
-      <div class="meta">
-        <h3>${escapeHtml(p.nomePopular || p.nome_popular || p.nome_cientifico || '—')}</h3>
-        <p><strong>Nome científico:</strong> ${escapeHtml(p.nomeCientifico || p.nome_cientifico || '—')}</p>
-        <p><strong>Uso:</strong> ${shorten(escapeHtml(p.usosMedicinais || p.usos_medicinais || p.usoMedicinal || '—'), 80)}</p>
-      </div>
-    `;
+    img.src = imgSrc;
+    img.alt = `Imagem de ${p.nome_popular || 'planta'}`;
+
+    const h3 = document.createElement('h3');
+    h3.textContent = p.nome_popular || p.nome_cientifico || '—';
+
+    const pCientifico = document.createElement('p');
+    pCientifico.innerHTML = '<strong>Nome científico:</strong>';
+    pCientifico.append(p.nome_cientifico || '—');
+
+    const pUso = document.createElement('p');
+    pUso.innerHTML = '<strong>Uso:</strong> ';
+    const usoText = p.uso_medicinal || p.usoMedicinal || '—';
+    pUso.append(shorten(usoText, 80));
+
+    metaDiv.appendChild(h3);
+    metaDiv.appendChild(pCientifico);
+    metaDiv.appendChild(pUso);
+
+    li.appendChild(img);
+    li.appendChild(metaDiv);
+
     lista.appendChild(li);
   });
-}
-
-function escapeHtml(unsafe) {
-  if (!unsafe) return '';
-  return String(unsafe)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;');
 }
 
 function shorten(text, n = 60) {
@@ -61,19 +77,18 @@ form.addEventListener('submit', async (ev) => {
   ev.preventDefault();
   message.textContent = '';
   const data = {
-    nome_popular: form.nomePopular.value.trim(),
-    nome_cientifico: form.nomeCientifico.value.trim(),
-    familia_botanica: form.familiaBotanica.value.trim(),
+    nome_popular: form.nome_popular.value.trim(),
+    nome_cientifico: form.nome_cientifico.value.trim(),
+    familia_botanica: form.familia_botanica.value.trim(),
     origem: form.origem.value.trim(),
-    usos_medicinais: form.usosMedicinais.value.trim(),
-    principios_ativos: form.principiosAtivos.value.trim(),
-    parte_utilizada: form.parteUtilizada.value.trim(),
-    modo_preparo: form.modoPreparo.value.trim(),
-    contraindicacoes: form.contraindicacoes.value.trim(),
+    uso_medicinal: form.uso_medicinal.value.trim(),
+    principio_ativo: form.principio_ativo.value.trim(),
+    parte_utilizada: form.parte_utilizada.value.trim(),
+    modo_preparo: form.modo_preparo.value.trim(),
+    contraindicacao: form.contraindicacao.value.trim(),
     imagem: form.imagem.value.trim()
   };
 
-  // validação simples
   if (!data.nome_popular || !data.nome_cientifico) {
     message.textContent = 'Por favor preencha "Nome Popular" e "Nome Científico".';
     return;
@@ -90,9 +105,8 @@ form.addEventListener('submit', async (ev) => {
       throw new Error(err.erro || err.message || 'Erro ao cadastrar');
     }
     const saved = await res.json();
-    message.textContent = `Planta cadastrada: ${saved.nomePopular || saved.nome_popular || '—'}`;
+    message.textContent = `Planta cadastrada: ${saved.nome_popular || '—'}`;
     form.reset();
-    // atualizar lista local (prefira refazer a requisição)
     await fetchPlantas();
   } catch (err) {
     console.error(err);
@@ -100,7 +114,6 @@ form.addEventListener('submit', async (ev) => {
   }
 });
 
-// acessibilidade do menu simples
 document.getElementById('navToggle')?.addEventListener('click', function () {
   const nav = document.getElementById('mainNav');
   const expanded = this.getAttribute('aria-expanded') === 'true';
@@ -108,5 +121,4 @@ document.getElementById('navToggle')?.addEventListener('click', function () {
   nav.style.display = expanded ? '' : 'flex';
 });
 
-// inicializa
 fetchPlantas();
