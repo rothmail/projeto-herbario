@@ -1,6 +1,6 @@
 // script.js - cliente
 const API_BASE = location.hostname === '127.0.0.1' || location.hostname === 'localhost'
-  ? 'http://127.0.0.1:5500/index.html'
+  ? 'http://127.0.0.1:5500/'
   : ''; // se for publicado no mesmo host, use relativo
 
 const form = document.getElementById('formRegister');
