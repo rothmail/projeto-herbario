@@ -1,38 +1,5 @@
-const API_BASE =
-  location.hostname === "127.0.0.1" || location.hostname === "localhost"
-    ? "http://127.0.0.1:3000"
-    : "";
+const API_BASE = location.hostname === "127.0.0.1" || location.hostname === "localhost" ? "http://127.0.0.1:3000" : "";
 
-
-document.getElementById('formRegister').addEventListener('submit', function (event) {
-  event.preventDefault();
-  const nome_popular = document.getElementById('nome_popular').value;
-  const nome_cientifico = document.getElementById('nome_cientifico').value;
-  const familia_botanica = document.getElementById('familia_botanica').value;
-  const origem = document.getElementById('origem').value;
-  const uso_medicinal = document.getElementById('uso_medicinal').value;
-  const principio_ativo = document.getElementById('principio_ativo').value;
-  const parte_utilizada = document.getElementById('parte_utilizada').value;
-  const modo_preparo = document.getElementById('modo_preparo').value;
-  const imagem = document.getElementById('imagem').value;
-
-  fetch('http://localhost:3030/cadastro', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ nome_popular, nome_cientifico, familia_botanica, origem})
-  })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        alert(data.message);
-        window.location.href = 'login.html';
-      } else {
-        alert(data.message);
-      }
-    });
-});
 const form = document.getElementById("formRegister");
 const lista = document.getElementById("plantasLista");
 const message = document.getElementById("formMessage");

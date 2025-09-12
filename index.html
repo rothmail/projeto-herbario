@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
     <header>
         <nav>
             <ul>
@@ -58,26 +57,18 @@
 
             <label for="imagem">URL da Imagem</label>
             <input type="text" id="imagem" placeholder="Ex: https://exemplo.com/plant.jpg">
+
+            <button type="submit">Adicionar ao Herbário</button>
         </form>
-        <button type="submit">Adicionar ao Herbário</button>
+        <p id="formMessage"></p>
     </section>
 
     <section id="list-section">
         <h2>Plantas no Herbário</h2>
         <ul id="plantasLista">
-            <li class="pant-card">
-                <img src="./interfaces/img/camomila-planta_herbario.jpg" alt="Planta">
-                <h3>Camomila</h3>
-                <p>Matricaria chamomilla</p>
-            </li>
-            <li class="plant-card">
-                <img src="./interfaces/img/hortela-planta_herbario.jpg" alt="Planta">
-                <h3>Hortelã</h3>
-                <p>Mentha spicata</p>
-            </li>
         </ul>
     </section>
-<script src="./interfaces/js/script.js"></script>
+    <script src="./interfaces/js/script.js"></script>
 </body>
 
 </html>

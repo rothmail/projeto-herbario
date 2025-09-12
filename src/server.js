@@ -16,7 +16,7 @@ app.get('/plantas', (req, res) => {
             console.error('Erro ao buscar plantas:', err);
             return res.status(500).json({ erro: 'Erro interno no servidor ao buscar plantas.' });
         }
-       res.status(200).json(results);
+        res.status(200).json(results);
     });
 });
 
@@ -49,7 +49,7 @@ app.post('/plantas', (req, res) => {
             }
             return res.status(500).json({ erro: 'Erro interno no servidor ao salvar a planta.' });
         }
-        
+
         const novaPlanta = {
             id: result.insertId,
             ...req.body

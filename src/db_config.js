@@ -1,10 +1,9 @@
-// db_config.js
 const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: '7410',
     database: 'projeto_herbario'
 });
 
